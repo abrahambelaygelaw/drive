@@ -11,7 +11,7 @@ export default defineConfig({
         host: env.SINGLESTORE_HOST,
         user: env.SINGLESTORE_USER,
         password:env.SINGLESTORE_PASS,
-        port: env.SINGLESTORE_PORT,
+        port: parseInt(env.SINGLESTORE_PORT),
         database: env.SINGLESTORE_DB_NAME,
         ssl: {},
     },
