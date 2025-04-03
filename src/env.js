@@ -14,7 +14,7 @@ export const env = createEnv({
     SINGLESTORE_HOST: z.string(),
     SINGLESTORE_USER: z.string(),
     SINGLESTORE_PASS: z.string(),
-    SINGLESTORE_PORT: z.string().transform((val) => parseInt(val, 10)),
+    SINGLESTORE_PORT: z.string(),
     SINGLESTORE_DB_NAME: z.string(),
   },
 
