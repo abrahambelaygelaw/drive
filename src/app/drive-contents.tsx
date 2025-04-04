@@ -5,6 +5,13 @@ import { Button } from "~/components/ui/button";
 import { FileRow, FolderRow } from "./file-row";
 import type {folders,files} from "~/server/db/schema";
 import Link from "next/link";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 export default function DriveContent(props : {
     file : typeof files.$inferSelect[],
@@ -21,8 +28,8 @@ export default function DriveContent(props : {
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center">
             <Link
-            href="/f/1"
-            //   variant="ghost"
+              href="/f/1"
+              //   variant="ghost"
               className="mr-2 text-gray-300 hover:text-white"
             >
               My Drive
@@ -39,13 +46,12 @@ export default function DriveContent(props : {
               </div>
             ))}
           </div>
-          <Button
-            onClick={handleUpload}
-            className="bg-blue-600 text-white hover:bg-blue-700"
-          >
-            <Upload className="mr-2" size={20} />
-            Upload
-          </Button>
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
         <div className="rounded-lg bg-gray-800 shadow-xl">
           <div className="border-b border-gray-700 px-6 py-4">
@@ -57,11 +63,7 @@ export default function DriveContent(props : {
           </div>
           <ul>
             {props.folder.map((folder) => (
-              <FolderRow
-                key={folder.id}
-                folder={folder}
-                
-              />
+              <FolderRow key={folder.id} folder={folder} />
             ))}
             {props.file.map((file) => (
               <FileRow key={file.id} file={file} />
