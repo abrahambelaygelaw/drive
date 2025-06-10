@@ -11,6 +11,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { UploadButton } from "~/components/uploadthing";
+import { useRouter } from "next/navigation";
 
 export default function DriveContent(props : {
     file : typeof files.$inferSelect[],
@@ -18,7 +19,7 @@ export default function DriveContent(props : {
     parents : typeof folders.$inferSelect[]
 }) {
 
-
+const navigate = useRouter()
   return (
     <div className="min-h-screen bg-gray-900 p-8 text-gray-100">
       <div className="mx-auto max-w-6xl">
@@ -67,7 +68,12 @@ export default function DriveContent(props : {
             ))}
           </ul>
         </div>
-        <UploadButton endpoint="imageUploader" />
+        <UploadButton endpoint="imageUploader" 
+              onClientUploadComplete={()=>{
+                console.log("Files successfully uploaded")
+                navigate.refresh()
+              }}
+        />
       </div>
     </div>
   );
